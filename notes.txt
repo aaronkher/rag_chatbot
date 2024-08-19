@@ -1,0 +1,5 @@
+Selecting the documents to retrieve.
+
+
+Document -> 1 ... n vectors
+
