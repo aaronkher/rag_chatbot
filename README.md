@@ -77,8 +77,6 @@ streamlit run frontend/chat_page.py
 docker compose build
 ```
 
-![Docker Build Screenshot](docs/images/docker_compose_build.png)
-
 This command will build the Docker images for both the API and the frontend.
 
 #### 2. Run the Services
@@ -86,8 +84,6 @@ This command will build the Docker images for both the API and the frontend.
 ```bash
 docker compose up
 ```
-
-![Docker Compose Up Screenshot](docs/images/docker_compose_up.png)
 
 🚨 **Important:** It takes some time for both the API (main_api.py) and the frontend (chat_page.py) services to start up completely. Please wait until you see both the API and frontend are running before attempting to use the application. The API will be available at `http://localhost:8000` and the Frontend will be available at `http://localhost:8501`.
 
