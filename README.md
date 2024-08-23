@@ -94,7 +94,7 @@ This command will build the Docker images for both the API and the frontend.
 docker compose up
 ```
 
-![Docker Compose Up Screenshot](docs/images/docker_compose_up.pngpng)
+![Docker Compose Up Screenshot](docs/images/docker_compose_up.png)
 
 🚨 **Important:** It takes some time for both the API (main_api.py) and the frontend (chat_page.py) services to start up completely. Please wait until you see both the API and frontend are running before attempting to use the application. The API will be available at `http://localhost:8000` and the Frontend will be available at `http://localhost:8501`.
 
