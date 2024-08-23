@@ -3,13 +3,6 @@
 
 This project is a Retrieval-Augmented Generation (RAG) system that allows users to upload PDF files, extract text from them, and interact with a chatbot that uses the retrieved information as context to provide relevant answers. The system is built using Python, Flask for the backend, and Streamlit for the frontend.
 
-## Features
-
-- **Upload PDF files:** Extract text from uploaded PDF files using OCR.
-- **Chatbot Interaction:** Engage in a conversation with a chatbot that retrieves relevant information from the uploaded documents.
-- **Docker Support:** Easily run the application using Docker.
-- **Multiple Modes of Operation:** Run the application locally via Git or inside a Docker container.
-
 ## Getting Started
 
 ### Prerequisites
@@ -119,6 +112,12 @@ docker compose down
 - `Dockerfile.api`: Dockerfile for the API service.
 - `Dockerfile.frontend`: Dockerfile for the Frontend service.
 - `docker-compose.yml`: Docker Compose configuration for running the project.
+
+### References
+
+- **OCR Model (Nougat)**: [Hugging Face Nougat Documentation](https://huggingface.co/docs/transformers/en/model_doc/nougat)
+- **Sentence Transformers for Vectorization**: [Hugging Face Sentence Transformers](https://huggingface.co/sentence-transformers)
+- **ChatGPT OpenAI LLM**: [OpenAI Chat Completions Guide](https://platform.openai.com/docs/guides/chat-completions)
 
 Make sure to create the `api_keys.env` file as described above and correctly set the `OPENAI_API_KEY` variable.
 
