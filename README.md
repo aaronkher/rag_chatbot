@@ -113,6 +113,10 @@ docker compose down
 - `Dockerfile.frontend`: Dockerfile for the Frontend service.
 - `docker-compose.yml`: Docker Compose configuration for running the project.
 
+### Video Demonstration
+
+Check out this [video demonstration](https://youtu.be/F9gwzJouI0w) that showcases the project and explains how RAG works.
+
 ### References
 
 - **OCR Model (Nougat)**: [Hugging Face Nougat Documentation](https://huggingface.co/docs/transformers/en/model_doc/nougat)
