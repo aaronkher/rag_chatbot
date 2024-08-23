@@ -10,7 +10,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from collections import defaultdict
 from typing import Optional, List
 
-# print("Using Python executable:", sys.executable)
 
 processor = AutoProcessor.from_pretrained("facebook/nougat-small")
 model = VisionEncoderDecoderModel.from_pretrained("facebook/nougat-small")

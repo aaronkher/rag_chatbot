@@ -1,9 +1,11 @@
+import os
 import streamlit as st
 import requests
 
 st.title("RAG")
 st.write("Upload PDFs and Chat.")
 
+BACKEND_API = os.getenv('BACKEND_API', 'http://api:8000')
 
 if 'history' not in st.session_state:
     st.session_state.history = []
@@ -15,7 +17,8 @@ def send_message():
     user_input = st.session_state.input
     if user_input:
         try:
-            response = requests.post("http://127.0.0.1:8000/chat", json={"message": user_input}, timeout=None)
+            response = requests.post(f"{BACKEND_API}/chat", json={"message": user_input}, timeout=None)
+            #response = requests.post(f"http://{BACKEND_API}:8000/chat", json={"message": user_input}, timeout=None)
             response_data = response.json()
 
             bot_response = response_data.get("response", "No response from the bot")
@@ -33,9 +36,11 @@ def send_message():
 
 uploaded_file = st.file_uploader("Upload a PDF file", type=["pdf"])
 
+# BACKEND_API = "rag_chatbot-api-1"
 if uploaded_file and not st.session_state.file_processed:
     with st.spinner("Processing the PDF..."):
-        response = requests.post("http://127.0.0.1:8000/upload", files={"file": uploaded_file})
+        response = requests.post(f"{BACKEND_API}/upload", files={"file": uploaded_file})
+        # response = requests.post(f"http://{BACKEND_API}:8000/upload", files={"file": uploaded_file})
         if response.status_code == 200:
             st.success("PDF processed successfully!")
             response_data = response.json()

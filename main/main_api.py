@@ -7,18 +7,24 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import pandas as pd
 from flask import Flask, request, jsonify
 from sentence_transformers import SentenceTransformer
-from rag.llama import Llama  
 from rag.chatgpt import ChatGPT  
 from rag.document_vectorizer import DocumentVectorizer
 from retriever.retriever import Retriever
 from rag.ocr import OCR
 
+# print("Python version:", sys.version)
+# print("Current working directory:", os.getcwd())
+# print("Contents of current directory:", os.listdir())
+# print("All modules imported successfully")
 
 app = Flask(__name__)
+
+print("API Running.")
 
 conversation_history = [] # history
 combined_df = pd.DataFrame()  # in-memory vectorized data (vector db)
 ocr = OCR()
+model = SentenceTransformer("all-MiniLM-L6-v2")
 RETRIEVER_SIMILARITY_THRESHOLD = 0.1 # for retriever 
 
 # uploaded document location
@@ -26,6 +32,10 @@ TEXT_DOCUMENTS_FOLDER = os.path.join(os.path.dirname(__file__), '../text_documen
 
 # model_path = '/Users/aaronkher/Documents/VScodeProjects/retrieval-augmented-generation/models/llama-2-7b-chat.Q4_K_M.gguf'
 # llama = Llama(model_path=model_path)
+
+@app.route('/')
+def health_check():
+    return "API is running", 200
 
 @app.route('/upload', methods=['POST'])
 def upload_pdf():
@@ -50,7 +60,6 @@ def upload_pdf():
             with open(txt_path, 'w') as txt_file:
                 txt_file.write(text)
             
-            model = SentenceTransformer("all-MiniLM-L6-v2")
             vectorizer = DocumentVectorizer(embedding_model=model)
             df = vectorizer.create_dataframe(txt_path)
             
@@ -67,6 +76,7 @@ def upload_pdf():
 def chat():
     global combined_df, conversation_history
     message = request.json.get('message')
+    similarity = None
     if message:
         if combined_df is not None and not combined_df.empty:
             retriever = Retriever()
@@ -118,8 +128,24 @@ def chat():
     
     return jsonify({"error": "No message sent"}), 400
 
+
+# # local
+# if __name__ == '__main__':
+#     if not os.path.exists(TEXT_DOCUMENTS_FOLDER):
+#         os.makedirs(TEXT_DOCUMENTS_FOLDER)
+    
+#     app.run(port=8000, debug=True)
+
+# docker
 if __name__ == '__main__':
+    print("Starting Flask app...")
     if not os.path.exists(TEXT_DOCUMENTS_FOLDER):
         os.makedirs(TEXT_DOCUMENTS_FOLDER)
+    #print(f"TEXT_DOCUMENTS_FOLDER created: {os.path.exists(TEXT_DOCUMENTS_FOLDER)}")
     
-    app.run(port=8000, debug=True)
+    try:
+        app.run(host='0.0.0.0', port=8000)
+    except Exception as e:
+        print(f"Error starting Flask app: {e}")
+        import traceback
+        traceback.print_exc()

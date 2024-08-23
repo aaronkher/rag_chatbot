@@ -1,0 +1,21 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+venv/
+
+# Ignore environment variables files
+.env
+*.env
+
+# Ignore version control directories
+.git/
+.gitignore
+
+# Ignore other unnecessary files
+.DS_Store
+node_modules/
+models/

@@ -4,7 +4,8 @@ from sentence_transformers import SentenceTransformer
 import numpy as np
 import pandas as pd
 
-nltk.download('punkt')
+# Ensure this line is not necessary if nltk data is downloaded during Docker build
+# nltk.download('punkt')
 
 class DocumentVectorizer:
     def __init__(self, embedding_model, chunk_size=200):
@@ -21,7 +22,7 @@ class DocumentVectorizer:
         chunks = []
         current_chunk = []
         current_length = 0
-        
+
         for sentence in sentences:
             sentence_length = len(word_tokenize(sentence))
             if current_length + sentence_length <= self.chunk_size:
@@ -31,10 +32,10 @@ class DocumentVectorizer:
                 chunks.append(" ".join(current_chunk))
                 current_chunk = [sentence]
                 current_length = sentence_length
-        
+
         if current_chunk:
             chunks.append(" ".join(current_chunk))
-        
+
         return chunks
 
     def get_sentence_embedding(self, sentence):
@@ -60,9 +61,3 @@ class DocumentVectorizer:
 
 if __name__ == "__main__":
     pass
-    # txt_path = 'rag/document_1.txt'
-    # model = SentenceTransformer("all-MiniLM-L6-v2")
-    # vectorizer = DocumentVectorizer(embedding_model=model)
-    # df = vectorizer.create_dataframe(txt_path)
-    # print(df)
-    
