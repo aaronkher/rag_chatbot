@@ -1,0 +1,14 @@
+# frontend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-frontend-service
+spec:
+  selector:
+    app: my-frontend
+  ports:
+  - protocol: TCP
+    port: 8501
+    targetPort: 8501
+    nodePort: 30002  
+  type: NodePort

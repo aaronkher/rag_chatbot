@@ -5,7 +5,11 @@ import requests
 st.title("RAG")
 st.write("Upload PDFs and Chat.")
 
-BACKEND_API = os.getenv('BACKEND_API', 'http://api:8000')
+# for DOCKER
+#BACKEND_API = os.getenv('BACKEND_API', 'http://api:8000')
+
+# for Kubernetes
+BACKEND_API = os.getenv('BACKEND_API', 'http://my-api-service:8000')
 
 if 'history' not in st.session_state:
     st.session_state.history = []

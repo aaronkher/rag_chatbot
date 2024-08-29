@@ -1,11 +1,18 @@
-FROM python:3.10-bullseye
+FROM python:3.10
 
 WORKDIR /app
 
 COPY . /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gnupg dirmngr netcat-openbsd curl && \
+    gnupg dirmngr curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl -fsSL https://ftp-master.debian.org/keys/archive-key-10.asc | apt-key add - && \
+    curl -fsSL https://ftp-master.debian.org/keys/archive-key-10-security.asc | apt-key add - && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    netcat-openbsd && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
