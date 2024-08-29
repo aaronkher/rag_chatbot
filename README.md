@@ -28,7 +28,7 @@ This project is a Retrieval-Augmented Generation (RAG) system that allows users 
 
    ```bash
    python3 -m venv rag_chatbot_venv
-   source rag_chatbot_venv/bin/activate  # On Windows use `rag_chatbot_venv\Scriptsctivate`
+   source rag_chatbot_venv/bin/activate  # On Windows use `rag_chatbot_venv\Scripts\activate`
    ```
 
 3. **Install dependencies**
@@ -50,6 +50,20 @@ This project is a Retrieval-Augmented Generation (RAG) system that allows users 
    Replace `your_openai_api_key_here` with your actual OpenAI API key.
 
 ## Running the Application
+
+### Important Configuration Note
+In the Streamlit frontend code (`frontend/chat_page.py`), ensure the `BACKEND_API` variable points to the correct backend service URL:
+
+- For **Docker** setup, use:
+  ```python
+  BACKEND_API = os.getenv('BACKEND_API', 'http://api:8000')
+  ```
+- For **Kubernetes** setup, uncomment the following line and comment out the Docker line:
+  ```python
+  # BACKEND_API = os.getenv('BACKEND_API', 'http://my-api-service:8000')
+  ```
+
+**Note**: The `BACKEND_API` is set for Docker functionality by default. Make sure to update it accordingly if you are using Kubernetes.
 
 ### Option 1: Local Environment
 
@@ -84,6 +98,9 @@ This project is a Retrieval-Augmented Generation (RAG) system that allows users 
    ```
 
    The API will be available at `http://localhost:8000` and the Frontend will be available at `http://localhost:8501`.
+
+   🚨 **Important:** It takes some time for both the API (main_api.py) and the frontend (chat_page.py) services to start up completely. Please wait until you see both the API and frontend are running before attempting to use the application. 
+
 
 3. **Stop the services**
 
@@ -182,6 +199,13 @@ This project is a Retrieval-Augmented Generation (RAG) system that allows users 
 - `Dockerfile.api`: Dockerfile for the API service.
 - `Dockerfile.frontend`: Dockerfile for the Frontend service.
 - `docker-compose.yml`: Docker Compose configuration for running the project.
+- `api-deployment.yaml`: Kubernetes Deployment configuration for the API service.
+- `api-service.yaml`: Kubernetes Service configuration for exposing the API service.
+- `frontend-deployment.yaml`: Kubernetes Deployment configuration for the frontend service.
+- `frontend-service.yaml`: Kubernetes Service configuration for exposing the frontend service.
+- `kind-config.yaml`: Configuration file for creating a Kubernetes cluster using `kind`.
+- `api_keys.env`: Environment file containing sensitive information such as the OpenAI API key.
+
 
 ## References
 
@@ -190,4 +214,3 @@ This project is a Retrieval-Augmented Generation (RAG) system that allows users 
 - ChatGPT OpenAI LLM: OpenAI Chat Completions Guide
 
 Make sure to create the `api_keys.env` file as described above and correctly set the `OPENAI_API_KEY` variable.
-
