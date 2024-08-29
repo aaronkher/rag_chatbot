@@ -63,7 +63,7 @@ In the Streamlit frontend code (`frontend/chat_page.py`), ensure the `BACKEND_AP
   ```python
   BACKEND_API = os.getenv('BACKEND_API', 'http://api:8000')
   ```
-  
+
 - For **Kubernetes** setup, uncomment the following line and comment out the Docker line:
   ```python
   # BACKEND_API = os.getenv('BACKEND_API', 'http://my-api-service:8000')
@@ -212,11 +212,14 @@ In the Streamlit frontend code (`frontend/chat_page.py`), ensure the `BACKEND_AP
 - `kind-config.yaml`: Configuration file for creating a Kubernetes cluster using `kind`.
 - `api_keys.env`: Environment file containing sensitive information such as the OpenAI API key.
 
+### Video Demonstration
 
-## References
+Check out this [video demonstration](https://youtu.be/F9gwzJouI0w) that showcases the project and explains how RAG works.
 
-- OCR Model (Nougat): Hugging Face Nougat Documentation
-- Sentence Transformers for Vectorization: Hugging Face Sentence Transformers
-- ChatGPT OpenAI LLM: OpenAI Chat Completions Guide
+### References
+
+- **OCR Model (Nougat)**: [Hugging Face Nougat Documentation](https://huggingface.co/docs/transformers/en/model_doc/nougat)
+- **Sentence Transformers for Vectorization**: [Hugging Face Sentence Transformers](https://huggingface.co/sentence-transformers)
+- **ChatGPT OpenAI LLM**: [OpenAI Chat Completions Guide](https://platform.openai.com/docs/guides/chat-completions)
 
 Make sure to create the `api_keys.env` file as described above and correctly set the `OPENAI_API_KEY` variable.
