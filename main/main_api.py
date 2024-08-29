@@ -12,10 +12,6 @@ from rag.document_vectorizer import DocumentVectorizer
 from retriever.retriever import Retriever
 from rag.ocr import OCR
 
-# print("Python version:", sys.version)
-# print("Current working directory:", os.getcwd())
-# print("Contents of current directory:", os.listdir())
-# print("All modules imported successfully")
 
 app = Flask(__name__)
 

@@ -54,16 +54,22 @@ This project is a Retrieval-Augmented Generation (RAG) system that allows users 
 ### Important Configuration Note
 In the Streamlit frontend code (`frontend/chat_page.py`), ensure the `BACKEND_API` variable points to the correct backend service URL:
 
+- For **Local Environment (without Docker)** setup, uncomment the following line and comment out the Docker line:
+  ```python
+  # BACKEND_API = os.getenv('BACKEND_API', 'http://localhost:8000')
+  ```
+
 - For **Docker** setup, use:
   ```python
   BACKEND_API = os.getenv('BACKEND_API', 'http://api:8000')
   ```
+  
 - For **Kubernetes** setup, uncomment the following line and comment out the Docker line:
   ```python
   # BACKEND_API = os.getenv('BACKEND_API', 'http://my-api-service:8000')
   ```
 
-**Note**: The `BACKEND_API` is set for Docker functionality by default. Make sure to update it accordingly if you are using Kubernetes.
+**Note**: The `BACKEND_API` is set for Docker functionality by default. Make sure to update it accordingly if you are using Kubernetes or running the application locally without Docker
 
 ### Option 1: Local Environment
 

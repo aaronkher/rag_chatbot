@@ -5,6 +5,9 @@ import requests
 st.title("RAG")
 st.write("Upload PDFs and Chat.")
 
+# For LOCAL
+#BACKEND_API = os.getenv('BACKEND_API', 'http://localhost:8000')
+
 # for DOCKER
 BACKEND_API = os.getenv('BACKEND_API', 'http://api:8000')
 
